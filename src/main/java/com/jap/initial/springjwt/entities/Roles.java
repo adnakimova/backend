@@ -1,4 +1,4 @@
-package com.jap.initial.springjwt.model;
+package com.jap.initial.springjwt.entities;
 
 import java.util.Collection;
 
@@ -28,6 +28,10 @@ import javax.persistence.*;
 public class Roles {
 	
 
+	public Roles(String name2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -36,7 +40,5 @@ public class Roles {
 	@Column(name = "name")
 	private String name;
 	
-	public Roles(String string) {
-		this.name = name;
-	}
+
 }

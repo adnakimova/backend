@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.jap.initial.springjwt.model.Roles;
-import com.jap.initial.springjwt.model.Users;
+import com.jap.initial.springjwt.entities.Roles;
+import com.jap.initial.springjwt.entities.Users;
 
 public interface RolesRepository extends JpaRepository<Roles, Long>{
 

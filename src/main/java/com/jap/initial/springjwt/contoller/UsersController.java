@@ -1,8 +1,10 @@
 package com.jap.initial.springjwt.contoller;
 
-import com.jap.initial.springjwt.model.Users;
+import com.jap.initial.springjwt.entities.Roles;
+import com.jap.initial.springjwt.entities.Users;
 import com.jap.initial.springjwt.payload.ApiResponse;
 import com.jap.initial.springjwt.payload.MetaInfoResponse;
+import com.jap.initial.springjwt.repositories.RolesRepository;
 import com.jap.initial.springjwt.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,17 +23,22 @@ import java.util.Map;
 public class UsersController {
 
     private final UsersService usersService;
+    private final RolesRepository rolesRepository;
 
     @Autowired
-    public UsersController(UsersService usersService) {
+    public UsersController(UsersService usersService,RolesRepository rolesRepository) {
         this.usersService = usersService;
+		this.rolesRepository = rolesRepository;
     }
 
+    
     @GetMapping("")
     public ApiResponse getAll(@RequestParam Map<String, String> params) {
-        List<Users> users = params.isEmpty() ?  usersService.findAllUsers() : usersService.findByCriteria(params);
+        List<Users> users = params.isEmpty() ? 
+        usersService.findAllUsers() : usersService.findByCriteria(params);
         return new ApiResponse(users);
     }
+    
 
     @GetMapping("/{id}")
     public ApiResponse getById(@PathVariable Long id) {

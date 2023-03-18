@@ -31,22 +31,7 @@ public class MapValidationErrorService {
     public ResponseEntity<?> mapValidationError(Class clazz, BindingResult result) {
         if (result.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
-//            try {
-//                for (FieldError error: result.getFieldErrors()) {
-//                    Field field = clazz.getDeclaredField(error.getField());
-//                    field.setAccessible(true);
-//                    JsonProperty jsonProperty = field.getDeclaredAnnotation(JsonProperty.class);
-//                    String fieldName = (jsonProperty!=null) ?
-//                            (!jsonProperty.value().isEmpty()) ?
-//                                    jsonProperty.value() : error.getField() :
-//                            error.getField();
-//
-//                    errorMap.put(fieldName, error.getDefaultMessage());
-//                }
-//            } catch (NoSuchFieldException e) {
-//                e.printStackTrace();
-//                throw new AppException(e.getMessage());
-//            }
+
             return new ResponseEntity<>(new ApiResponse(HttpStatus.BAD_REQUEST, errorMap), HttpStatus.BAD_REQUEST);
         }
         return null;

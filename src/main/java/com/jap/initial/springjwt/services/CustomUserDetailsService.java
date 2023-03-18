@@ -1,6 +1,6 @@
 package com.jap.initial.springjwt.services;
 
-import com.jap.initial.springjwt.model.Users;
+import com.jap.initial.springjwt.entities.Users;
 import com.jap.initial.springjwt.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

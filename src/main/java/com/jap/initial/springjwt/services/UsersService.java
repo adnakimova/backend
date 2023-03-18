@@ -1,9 +1,9 @@
 package com.jap.initial.springjwt.services;
 
+import com.jap.initial.springjwt.entities.Users;
 import com.jap.initial.springjwt.exceptions.AppException;
 import com.jap.initial.springjwt.exceptions.EntityExeption;
 import com.jap.initial.springjwt.exceptions.ResourceNotFoundException;
-import com.jap.initial.springjwt.model.Users;
 import com.jap.initial.springjwt.payload.ChangePasswordRequest;
 import com.jap.initial.springjwt.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,11 @@ public class UsersService {
         this.em = em;
     }
 
+    public Users findByEmail(String email) {
+		return this.usersRepository.findByEmail(email);
+    	
+    }
+    
     public Users saveUser(Users newUsers) {
         try {
             if (newUsers.getId() == null) {
@@ -51,6 +56,7 @@ public class UsersService {
         }
     }
 
+    
     public boolean changePassword(ChangePasswordRequest changePasswordRequest) {
         Users users = usersRepository.findByEmail(changePasswordRequest.getEmail());
         if (users == null) throw new ResourceNotFoundException("Users", "email", changePasswordRequest.getEmail());
@@ -67,6 +73,7 @@ public class UsersService {
         }
     }
 
+    
     public void delete(Long id) {
         Users oldUsers = findById(id);
         usersRepository.delete(oldUsers);
@@ -76,6 +83,7 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
+    
     public Users findById(Long id) {
         Users users = usersRepository.getById(id);
         if (users == null)
@@ -84,7 +92,8 @@ public class UsersService {
     }
 
     public List<Users> findAllByCriteria(String criteria) {
-        return usersRepository.findByFullNameContainsOrEmailContainsOrPhoneContainsOrPasswordContains(criteria, criteria, criteria, criteria);
+        return usersRepository.findByFullNameContainsOrEmailContainsOrPhoneContainsOrPasswordContains
+        		(criteria, criteria, criteria, criteria);
     }
 
     public Page<Users> findAll(Pageable pageable) {
@@ -108,6 +117,9 @@ public class UsersService {
 
         return em.createQuery(query).getResultList();
     }
+
+
+	
 
 
 }

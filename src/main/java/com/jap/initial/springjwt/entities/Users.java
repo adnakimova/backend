@@ -1,8 +1,10 @@
-package com.jap.initial.springjwt.model;
+package com.jap.initial.springjwt.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = Users.TABLE)
 
@@ -32,12 +35,16 @@ public class Users implements UserDetails {
     @Column(name = _ID)
     @JsonProperty
     private Long id;
+    
+    
     @NotBlank
     @Size(max = 20)
     @Column(name = _FULL_NAME)
     @JsonProperty(_FULL_NAME)
     @ApiModelProperty(required = true, notes = "not blank, max 20")
     private String fullName;
+    
+    
     @Email
     @NotBlank
     @Size(min = 6, max = 100)
@@ -45,22 +52,32 @@ public class Users implements UserDetails {
     @JsonProperty
     @ApiModelProperty(required = true, notes = "not blank, max 100, email, unique")
     private String email;
+    
+    
     @NotBlank
     @Size(max = 20)
     @Column(name = _PHONE, unique = true)
     @JsonProperty
     @ApiModelProperty(required = true, notes = "not blank, max 20, unique")
     private String phone;
+    
+    
     @Column(name = _PASSWORD)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    
+    
     @Column(name = _CREATE_AT)
     @JsonProperty
     private Timestamp createAt;
+    
+    
+    
     @Column(name = _UPDATE_AT)
     @JsonProperty
     private Timestamp updateAt;
+    
     
     
     @ManyToMany 
@@ -92,11 +109,6 @@ public class Users implements UserDetails {
 	public Users() {
     }
     
-    
-    
-    
-    
-
     public Long getId() {
         return id;
     }
@@ -152,10 +164,6 @@ public class Users implements UserDetails {
         return null;
     }
     
-    
-    
-   
-
     @Override
     @JsonIgnore
     public String getUsername() {

@@ -16,7 +16,8 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
+    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+    		AuthenticationException e) throws IOException {
         LoginInvalidResponse loginInvalidResponse = new LoginInvalidResponse();
         String json = new Gson().toJson(new ApiResponse(HttpStatus.UNAUTHORIZED, loginInvalidResponse));
 
